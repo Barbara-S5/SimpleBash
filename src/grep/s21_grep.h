@@ -23,17 +23,22 @@ struct flags {
   bool no_messages;  //-s не песчатает сообщение об ошибке
   bool file;  // -f file берёт регулярныевыражения из файлов
   bool only_matching;  // -o Печатает только совпадающие непустые части
-                       // совпавшей строки.
-  char pattern[100][100];
-  int counter;
-  int count_dont_file;
-  int compl;
+                       // совпавшей строки
   bool mistake;
-  int another_file;
-  int tot_str;
+  char pattern[100][100];
+  int counter; //Передаётся колличество паттернов
+  int count_dont_file; // Колличество аргументов но не файлов
+  int compl; //колличество метчингов между файлом и строкой
+  int another_file; // счётчик для ещё одного текстового файла
+  int tot_str; // колличество всех строк файла
 };
 
 //--- Прототипы функций -------------------------------------
+void parse_short_keys1(char *argv[], strfl *grep_flags, int i);
+void pattern_e(int argc, char *argv[], strfl *grep_flags);
+void pattern_f(int argc, char *argv[], strfl *grep_flags);
+void read_file(char *argv[], int i, strfl *grep_flags);
+
 
 // void message(char *argument);
 // bool parse_short_keys(char *argv[], int inshkey, strfl *grep_flags);

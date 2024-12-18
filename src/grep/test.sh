@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 touch test.txt
 echo -e "
 aslj                        dhf
@@ -41,14 +41,13 @@ hello wolrld
 HELLO WORLD?" > test2.txt
 touch s21.txt
 touch grep.txt
-
 echo "1"
 echo "hello test.txt"
 ./s21_grep "hello" test.txt > s21.txt
 grep "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -58,8 +57,8 @@ echo "hello test.txt test2.txt"
 ./s21_grep "hello" test.txt test2.txt > s21.txt
 grep "hello" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -70,8 +69,8 @@ echo "hello test.txt"
 ./s21_grep "hello" test.txt > s21.txt
 grep "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -81,8 +80,8 @@ echo "-e hello test.txt"
 ./s21_grep -e "hello" test.txt > s21.txt
 grep -e "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -92,8 +91,8 @@ echo "-e hello -e wo test.txt"
 ./s21_grep -e "hello" -e "wo" test.txt > s21.txt
 grep -e "hello" -e "wo" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -103,8 +102,8 @@ echo "-i Hello test.txt"
 ./s21_grep -i "Hello" test.txt > s21.txt
 grep -i "Hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -114,8 +113,8 @@ echo "-v hello test.txt"
 ./s21_grep -v "hello" test.txt > s21.txt
 grep -v "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -125,8 +124,8 @@ echo "-c hello test.txt"
 ./s21_grep -c "hello" test.txt > s21.txt
 grep -c "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -136,8 +135,8 @@ echo "-l hello test.txt"
 ./s21_grep -l "hello" test.txt > s21.txt
 grep -l "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -147,8 +146,8 @@ echo "-n hello test.txt"
 ./s21_grep -n "hello" test.txt > s21.txt
 grep -n "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -158,8 +157,8 @@ echo "-h hello test.txt"
 ./s21_grep -h "hello" test.txt > s21.txt
 grep -h "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -169,8 +168,8 @@ echo "-s hello test.txt"
 ./s21_grep -s "hello" test.tx > s21.txt
 grep -s "hello" test.tx > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -180,8 +179,8 @@ echo "-f test2.txt test.txt"
 ./s21_grep -f "test2.txt" test.txt > s21.txt
 grep -f "test2.txt" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -191,8 +190,8 @@ echo "-o test2.txt test.txt"
 ./s21_grep -o "test2.txt" test.txt > s21.txt
 grep -o "test2.txt" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -202,8 +201,8 @@ echo "-e hello test.txt test2.txt"
 ./s21_grep -e "hello" test.txt test2.txt > s21.txt
 grep -e "hello" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -213,8 +212,8 @@ echo "-i Hello test.txt test2.txt"
 ./s21_grep -i "Hello" test.txt test2.txt > s21.txt
 grep -i "Hello" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -224,8 +223,8 @@ echo "-v hello test.txt test2.txt"
 ./s21_grep -v "hello" test.txt test2.txt > s21.txt
 grep -v "hello" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -235,8 +234,8 @@ echo "-c hello test.txt test2.txt"
 ./s21_grep -c "hello" test.txt test2.txt > s21.txt
 grep -c "hello" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -246,8 +245,8 @@ echo "-l hello test.txt test2.txt"
 ./s21_grep -l "hello" test.txt test2.txt > s21.txt
 grep -l "hello" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -257,8 +256,8 @@ echo "-n hello test.txt test2.txt"
 ./s21_grep -n "hello" test.txt test2.txt > s21.txt
 grep -n "hello" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -268,8 +267,8 @@ echo "-h hello test.txt test2.txt"
 ./s21_grep -h "hello" test.txt test2.txt > s21.txt
 grep -h "hello" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -279,8 +278,8 @@ echo "-s hello test.tx test2.txt"
 ./s21_grep -s "hello" test.tx test2.txt > s21.txt
 grep -s "hello" test.tx test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -290,8 +289,8 @@ echo "-f test2.txt test.txt test2.txt"
 ./s21_grep -f "test2.txt" test.txt test2.txt > s21.txt
 grep -f "test2.txt" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -301,8 +300,8 @@ echo "-o Hello test.txt test2.txt"
 ./s21_grep -o "Hello" test.txt test2.txt > s21.txt
 grep -o "Hello" test.txt test2.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -312,8 +311,8 @@ echo "-i -e hello test.txt"
 ./s21_grep -i -e "hello" test.txt > s21.txt
 grep -i -e "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -323,8 +322,8 @@ echo "-v -c hello test.txt"
 ./s21_grep -v -c "hello" test.txt > s21.txt
 grep -v -c "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -334,8 +333,8 @@ echo "-l -n hello test.txt"
 ./s21_grep -l -n "hello" test.txt > s21.txt
 grep -l -n "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -345,8 +344,8 @@ echo "-v -i hello test.txt"
 ./s21_grep -v -i "hello" test.txt > s21.txt
 grep -v -i "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -356,8 +355,8 @@ echo "-c -n hello test.txt"
 ./s21_grep -c -n "hello" test.txt > s21.txt
 grep -c -n "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -367,8 +366,8 @@ echo "-l -c hello test.txt"
 ./s21_grep -l -c "hello" test.txt > s21.txt
 grep -l -c "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ];  
+ then echo "Correct"
 else
 echo "N/A"
 fi
@@ -378,8 +377,8 @@ echo "-e hello -e 1 test.txt"
 ./s21_grep -e "hello" -e 1 test.txt > s21.txt
 grep -e "hello" -e 1 test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ]; 
+then echo "Correct"
 else
 echo "N/A"
 fi
@@ -389,8 +388,8 @@ echo "-i -n hello test.txt"
 ./s21_grep -i -n "hello" test.txt > s21.txt
 grep -i -n "hello" test.txt > grep.txt
 diff s21.txt grep.txt
-if [ $? -eq 0 ]; then
-echo "Correct"
+if [ $? -eq 0 ]; 
+then echo "Correct"
 else
 echo "N/A"
 fi

@@ -7,10 +7,6 @@
 #include <string.h>
 
 #include "../common/com_line_fun.h"
-void parse_short_keys1(char *argv[], strfl *grep_flags, int i);
-void pattern_e(int argc, char *argv[], strfl *grep_flags);
-void pattern_f(int argc, char *argv[], strfl *grep_flags);
-void read_file(char *argv[], int i, strfl *grep_flags);
 
 int main(int argc, char *argv[]) {
   strfl grep_flags = {0};
@@ -132,6 +128,7 @@ void pattern_f(int argc, char *argv[], strfl *grep_flags) {
 void read_file(char *argv[], int i, strfl *grep_flags) {
   char buff_r[1024];
   int cflags = 0;
+  int tls = 0;
   grep_flags->tot_str = 0;
   regex_t regexp;
   FILE *fpoint = fopen(argv[i], "r");
@@ -147,7 +144,7 @@ void read_file(char *argv[], int i, strfl *grep_flags) {
           if (regexec(&regexp, buff_r, 0, NULL, cflags) == 0) {
             grep_flags->compl = 1;
           }
-          regfree(&regexp);
+          regfree(&regexp);//построчное чтение файла и компиляция паттернов и их мэтчинг
         }
       }
       if (grep_flags->compl != 0 && !grep_flags->invert_match) {
@@ -156,10 +153,10 @@ void read_file(char *argv[], int i, strfl *grep_flags) {
           grep_flags->compl = 0;
         } else {
           if (grep_flags->another_file == 1) {
-            printf("%s:%s", argv[i], buff_r);
+            printf("%s:%d", argv[i], grep_flags->tot_str);
             grep_flags->compl = 0;
           } else {
-            printf("%s", buff_r);
+            printf("%d", grep_flags->tot_str);
             grep_flags->compl = 0;
           }
         }
@@ -170,16 +167,17 @@ void read_file(char *argv[], int i, strfl *grep_flags) {
           printf("%s:%s", argv[i], buff_r);
         } else {
           printf("%s", buff_r);
+          grep_flags->compl = 0;
         }
-      } else if (grep_flags->invert_match && grep_flags->count &&
-                 grep_flags->compl == 0) {
-        if (grep_flags->another_file == 1) {
-          printf("%s:%d", argv[i], grep_flags->tot_str);
         } else {
-          printf("%d", grep_flags->tot_str);
-        }
+      // if (grep_flags->count) {
+      //   if (grep_flags->another_file == 1) {
+      //     printf("%s:%d", argv[i], grep_flags->tot_str);
+      //   } else {
+      //     printf("%d", grep_flags->tot_str);
+      //   }
         grep_flags->compl = 0;
-      }  // флаг v
+          }  // флаг v
 
       if (grep_flags->count && grep_flags->compl != 0) {
         if (grep_flags->another_file == 1) {
@@ -187,18 +185,39 @@ void read_file(char *argv[], int i, strfl *grep_flags) {
         }
       }
     }
-    if (grep_flags->count == 1) {
+    if (grep_flags->count == 1) { // функция флага c
       if (grep_flags->another_file == 1) {
         printf("%s:%d\n", argv[i], grep_flags->tot_str);
         grep_flags->compl = 0;
       } else {
         printf("%d\n", grep_flags->tot_str);
         grep_flags->compl = 0;
-      }  // функция флага c
+      } 
     }
+
+    if (grep_flags->files_with_matches && !grep_flags->invert_match && grep_flags->compl == 0){
+      printf("%s\n", argv[i]);
+    }
+
+    if (grep_flags->line_number && grep_flags->compl != 0){
+      tls = grep_flags->tot_str;
+      if (tls != 0) printf("%d:", tls);
+    }
+
+    if (grep_flags->only_matching) {
+      if (grep_flags->another_file == 1) {
+        printf("%s:", argv[i]);
+              if (grep_flags->tot_str != 0) printf("%d:", grep_flags->tot_str);
+            }
+            printf("%.*s", (int) (match.rm_eo - match.rm_so),
+                   buff_r + match.rm_so);
+            printf("\n");
+
+    }
+  }
+  
     fclose(fpoint);
   }
-}
 
 // принимаешь имя файла
 // принимаешь структуру
