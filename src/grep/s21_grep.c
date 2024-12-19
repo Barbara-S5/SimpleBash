@@ -204,19 +204,24 @@ void read_file(char *argv[], int i, strfl *grep_flags) {
       if (tls != 0) printf("%d:", tls);
     }
 
-    if (grep_flags->only_matching) {
-      if (grep_flags->another_file == 1) {
-        printf("%s:", argv[i]);
-              if (grep_flags->tot_str != 0) printf("%d:", grep_flags->tot_str);
-            }
-            printf("%.*s", (int) (match.rm_eo - match.rm_so),
-                   buff_r + match.rm_so);
-            printf("\n");
+    // if (grep_flags->only_matching) {
+    //   if (grep_flags->another_file == 1) {
+    //     printf("%s:", argv[i]);
+    //           if (grep_flags->tot_str != 0) printf("%d:", grep_flags->tot_str);
+    //         }
+    //           regmatch_t match;
+    //         printf("%.*s", match.rm_eo - match.rm_so,
+    //                buff_r + match.rm_so);
+    //         printf("\n");
 
+    // }
+    if (grep_flags->no_file_name && grep_flags->compl != 0){
+        printf("%s", buff_r);
+        grep_flags->compl = 0;
     }
+
+     fclose(fpoint);
   }
-  
-    fclose(fpoint);
   }
 
 // принимаешь имя файла
