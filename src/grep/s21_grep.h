@@ -24,10 +24,10 @@ struct flags {
   bool file;  // -f file берёт регулярныевыражения из файлов
   bool only_matching;  // -o Печатает только совпадающие непустые части
                        // совпавшей строки.
-  char pattern[100][100];
+  char pattern[512][128];
   int counter;
   int count_dont_file;
-  int compl ;
+  int comple ;
   bool mistake;
   int another_file;
   int tot_str;
@@ -37,7 +37,7 @@ struct flags {
 void parse_short_keys1(char *argv[], strfl *grep_flags, int i);
 void pattern_e(int argc, char *argv[], strfl *grep_flags);
 void pattern_f(int argc, char *argv[], strfl *grep_flags);
-void read_file(char *argv[], int i, strfl *grep_flags);
+int read_file(char *argv[], int i, strfl *grep_flags);
 void flag_n(strfl *grep_flags, int num_lne, char *argv[], int i, char *buff_r);
 void flag_l(strfl *grep_flags, char *argv[], int i);
 void flag_v(strfl *grep_flags, char *argv[], int i, char *buff_r);

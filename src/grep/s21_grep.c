@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../common/com_line_fun.h"
-
 int main(int argc, char *argv[]) {
   strfl grep_flags = {0};
   for (int i = 1; i < argc; i++) {
@@ -104,7 +102,7 @@ void pattern_e(int argc, char *argv[], strfl *grep_flags) {
 }
 
 void pattern_f(int argc, char *argv[], strfl *grep_flags) {
-  char buff[1024];
+  char buff[512];
   for (int i = 1; i < argc; i++) {
     if (argv[i][0] == '-' && strchr(argv[i], 'f')) {
       FILE *pat = fopen(argv[i + 1], "r");
@@ -112,7 +110,7 @@ void pattern_f(int argc, char *argv[], strfl *grep_flags) {
         printf("n/a\n");
         grep_flags->mistake = true;
       } else {
-        while (fgets(buff, 1024, pat) != NULL) {
+        while (fgets(buff, 512, pat) != NULL) {
           strcpy(grep_flags->pattern[grep_flags->counter], buff);
           int f = (strlen(grep_flags->pattern[grep_flags->counter]) - 1);  //
           char c = grep_flags->pattern[grep_flags->counter][f];
@@ -126,8 +124,8 @@ void pattern_f(int argc, char *argv[], strfl *grep_flags) {
   }
 }
 
-void read_file(char *argv[], int i, strfl *grep_flags) {
-  char buff_r[1024];
+int read_file(char *argv[], int i, strfl *grep_flags) {
+  char buff_r[512];
   int cflags = 0;
   grep_flags->tot_str = 0;
   int num_lne = 0;
@@ -137,16 +135,17 @@ void read_file(char *argv[], int i, strfl *grep_flags) {
     if (!grep_flags->no_messages) {
       printf("n/a\n");
     }
+    return 0;
   } else {
     if (grep_flags->ignore_case) {
       cflags = REG_ICASE;
     }  // условие при использовании флага i
-    while (fgets(buff_r, 1024, fpoint) != NULL) {
+    while (fgets(buff_r, 512, fpoint) != NULL) {
       num_lne++;
       for (int p = 0; p < grep_flags->counter; p++) {
         if (regcomp(&regexp, grep_flags->pattern[p], cflags) == 0) {
           if (regexec(&regexp, buff_r, 0, NULL, cflags) == 0) {
-            grep_flags->compl = 1;
+            grep_flags->comple = 1;
           }
           regfree(&regexp);
         }
@@ -157,46 +156,47 @@ void read_file(char *argv[], int i, strfl *grep_flags) {
     }
     flag_l(grep_flags, argv, i);
 
-    if (grep_flags->no_file_name && grep_flags->compl != 0) {
+    if (grep_flags->no_file_name && grep_flags->comple != 0) {
       printf("%s", buff_r);
-      grep_flags->compl = 0;
+      grep_flags->comple = 0;
     }
   }
   fclose(fpoint);
+  return 1;
 }
 
 void flag_n(strfl *grep_flags, int num_lne, char *argv[], int i, char *buff_r) {
-  if (grep_flags->line_number && grep_flags->compl != 0 &&
+  if (grep_flags->line_number && grep_flags->comple != 0 &&
       !grep_flags->invert_match && !grep_flags->files_with_matches) {
     int num_print = num_lne;
     if (grep_flags->another_file == 1) {
       printf("%s:", argv[i]);
     }
     printf("%d:%s", num_print, buff_r);
-    grep_flags->compl = 0;
+    grep_flags->comple = 0;
   }
 
-  if (grep_flags->line_number && grep_flags->compl != 0 &&
+  if (grep_flags->line_number && grep_flags->comple != 0 &&
       grep_flags->files_with_matches && !grep_flags->invert_match) {
     if (grep_flags->tot_str == 1) {
       printf("%s", argv[i]);
-      grep_flags->compl = 0;
+      grep_flags->comple = 0;
     } else {
-      grep_flags->compl = 0;
+      grep_flags->comple = 0;
     }
   }
 
   if (grep_flags->line_number &&
-      !grep_flags->compl &&grep_flags->invert_match &&
+      !grep_flags->comple &&grep_flags->invert_match &&
       !grep_flags->files_with_matches) {
     int num_print = num_lne;
     if (grep_flags->another_file == 1) {
       printf("%s:", argv[i]);
     }
     printf("%d:%s", num_print, buff_r);
-    grep_flags->compl = 0;
+    grep_flags->comple = 0;
   } else {
-    grep_flags->compl = 0;
+    grep_flags->comple = 0;
   }
 
   if (grep_flags->count && grep_flags->line_number) {
@@ -207,10 +207,10 @@ void flag_n(strfl *grep_flags, int num_lne, char *argv[], int i, char *buff_r) {
   }
 
   if (grep_flags->count && grep_flags->line_number &&
-      !grep_flags->invert_match && grep_flags->compl != 0) {
+      !grep_flags->invert_match && grep_flags->comple != 0) {
     int num_print = num_lne;
     printf("%d", num_print);
-    grep_flags->compl = 0;
+    grep_flags->comple = 0;
   }
 }
 
@@ -218,10 +218,10 @@ void flag_l(strfl *grep_flags, char *argv[], int i) {
   if (grep_flags->count == 1 && !grep_flags->files_with_matches) {
     if (grep_flags->another_file == 1) {
       printf("%s:%d\n", argv[i], grep_flags->tot_str);
-      grep_flags->compl = 0;
+      grep_flags->comple = 0;
     } else {
       printf("%d\n", grep_flags->tot_str);
-      grep_flags->compl = 0;
+      grep_flags->comple = 0;
     }  // функция флага c без l
   }
 
@@ -233,36 +233,30 @@ void flag_l(strfl *grep_flags, char *argv[], int i) {
 
   if (grep_flags->files_with_matches && grep_flags->count) {
     if (grep_flags->tot_str != 0) {
-      if (grep_flags->another_file == 1) {
-        printf("%s:1\n%s\n", argv[i], argv[i]);
-      } else {
-        printf("1\n%s\n", argv[i]);
-      }
-    } else {
-      printf("%s:0\n", argv[i]);
+      printf("%s\n", argv[i]);
     }
-    grep_flags->compl = 0;
+    grep_flags->comple = 0;
   }  // функция флага l и c вместе!
 }
 
 void flag_v(strfl *grep_flags, char *argv[], int i, char *buff_r) {
-  if (grep_flags->compl != 0 && !grep_flags->invert_match &&
+  if (grep_flags->comple != 0 && !grep_flags->invert_match &&
       !grep_flags->line_number) {
     if (grep_flags->count || grep_flags->files_with_matches) {
       grep_flags->tot_str++;
-      grep_flags->compl = 0;
+      grep_flags->comple = 0;
     } else {
       if (grep_flags->another_file == 1) {
         printf("%s:%s", argv[i], buff_r);
-        grep_flags->compl = 0;
+        grep_flags->comple = 0;
       } else {
         printf("%s", buff_r);
-        grep_flags->compl = 0;
+        grep_flags->comple = 0;
       }
     }
   }
 
-  if (grep_flags->invert_match && grep_flags->compl == 0 &&
+  if (grep_flags->invert_match && grep_flags->comple == 0 &&
       !grep_flags->line_number) {
     if (grep_flags->count || grep_flags->files_with_matches) {
       grep_flags->tot_str++;
@@ -274,6 +268,6 @@ void flag_v(strfl *grep_flags, char *argv[], int i, char *buff_r) {
       }
     }
   } else if (!grep_flags->line_number) {
-    grep_flags->compl = 0;
+    grep_flags->comple = 0;
   }  // флаг v
 }

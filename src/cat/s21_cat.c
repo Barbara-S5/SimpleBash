@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../common/com_line_fun.h"
+#include "pars_line_fun.h"
 
 int main(int argc, char *argv[]) {
   setlocale(LC_ALL, "ru_RU.UTF8");
@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
+
 
 // --- чтения текста с клавиатуры и вывод его же в терминал
 void rpcat() {
